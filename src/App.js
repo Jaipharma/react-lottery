@@ -3,7 +3,7 @@ import Lottery from "./components/Lottery";
 function App() {
   return (
     <>
-    <Lottery />
+        <Lottery />
     </>
   );
 }
