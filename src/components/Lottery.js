@@ -20,8 +20,7 @@ function LotteryRandomMachine({title, size}) {
     const calLottery = () => {
         // code เดิม
         //setLotteryNumber([randomNumber(), randomNumber(), randomNumber()]);
-
-        const randomArray = lotteryNumber.map((x) => randomNumber()); // [1, 2, 3]
+        const randomArray = lotteryNumber.map(() => randomNumber()); // [1, 2, 3]
         setLotteryNumber(randomArray);
     }
 
@@ -34,13 +33,6 @@ function LotteryRandomMachine({title, size}) {
                     return <CountUp className='lottery-number' end={item}></CountUp>
                 })
             }
-
-            {/* code เดิม
-            <CountUp className='lottery-number' end={lotteryNumber[0]}></CountUp>
-            <CountUp className='lottery-number' end={lotteryNumber[1]}></CountUp>
-            <CountUp className='lottery-number' end={lotteryNumber[2]}></CountUp> 
-            */}
-
         </div>
         <button 
             className='lottery-random-button'
@@ -53,7 +45,6 @@ function LotteryRandomMachine({title, size}) {
     )
 }
 
-// ถ้ามีใช้ useState ชื่อ default function ต้องขึ้นต้นด้วยตัวใหญ่เท่านั้น
 export default function Lottery() {
 
     return (
