@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import './Lottery.css'
+import CountUp from 'react-countup';
 
 function randomNumber() {
     // อันนี้ไม่ผ่านจะสุ่มไม่ได้เลข 0 เลย
@@ -34,9 +35,12 @@ export default function Lottery() {
         <>
         <h1 className='lottery-title'>สามตัวงวดนี้คือ... </h1>
         <div className='lottery-container'>
-            <div className='lottery-number'>{lotteryNumber[0]}</div>
-            <div className='lottery-number'>{lotteryNumber[1]}</div>
-            <div className='lottery-number'>{lotteryNumber[2]}</div>
+            {/* <div className='lottery-number'>{lotteryNumber[0]}</div> */}
+            <CountUp className='lottery-number' end={lotteryNumber[0]}></CountUp>
+            {/* <div className='lottery-number'>{lotteryNumber[1]}</div> */}
+            <CountUp className='lottery-number' end={lotteryNumber[1]}></CountUp>
+            {/* <div className='lottery-number'>{lotteryNumber[2]}</div> */}
+            <CountUp className='lottery-number' end={lotteryNumber[2]}></CountUp>
         </div>
         <button 
             className='lottery-random-button'
