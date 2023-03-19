@@ -10,37 +10,37 @@ function randomNumber() {
     return Math.floor(Math.random() * 10);
 }
 
-// ถ้ามีใช้ useState ชื่อ default function ต้องขึ้นต้นด้วยตัวใหญ่เท่านั้น
-export default function Lottery() {
+function LotteryRandomMachine({title, size}) {
 
-    /*
-    const [lotteryNumber1, setLotteryNumber1] = useState(1);
-    const [lotteryNumber2, setLotteryNumber2] = useState(2);
-    const [lotteryNumber3, setLotteryNumber3] = useState(3);
-
-    const calLottery = () => {
-        setLotteryNumber1(randomNumber());
-        setLotteryNumber2(randomNumber());
-        setLotteryNumber3(randomNumber());
-    }*/
-
-    // ข้างบนประกาศ useState เยอะเกิน แก้ไขโดยทำเป็น array ดังนี้
-    const [lotteryNumber, setLotteryNumber] = useState([1,2,3]);
+    // const [lotteryNumber, setLotteryNumber] = useState([1,2,3]);
+    // สร้าง array ตามขนาด size ของ lottery
+    const lotteryArray = Array(size).fill(0);  // [0, 0, 0]
+    const [lotteryNumber, setLotteryNumber] = useState(lotteryArray);
 
     const calLottery = () => {
-        setLotteryNumber([randomNumber(), randomNumber(), randomNumber()]);
+        // code เดิม
+        //setLotteryNumber([randomNumber(), randomNumber(), randomNumber()]);
+
+        const randomArray = lotteryNumber.map((x) => randomNumber()); // [1, 2, 3]
+        setLotteryNumber(randomArray);
     }
 
     return (
         <>
-        <h1 className='lottery-title'>สามตัวงวดนี้คือ... </h1>
+        <h1 className='lottery-title'>{title}</h1>
         <div className='lottery-container'>
-            {/* <div className='lottery-number'>{lotteryNumber[0]}</div> */}
+            {
+                lotteryNumber.map(item => {
+                    return <CountUp className='lottery-number' end={item}></CountUp>
+                })
+            }
+
+            {/* code เดิม
             <CountUp className='lottery-number' end={lotteryNumber[0]}></CountUp>
-            {/* <div className='lottery-number'>{lotteryNumber[1]}</div> */}
             <CountUp className='lottery-number' end={lotteryNumber[1]}></CountUp>
-            {/* <div className='lottery-number'>{lotteryNumber[2]}</div> */}
-            <CountUp className='lottery-number' end={lotteryNumber[2]}></CountUp>
+            <CountUp className='lottery-number' end={lotteryNumber[2]}></CountUp> 
+            */}
+
         </div>
         <button 
             className='lottery-random-button'
@@ -49,6 +49,17 @@ export default function Lottery() {
             สุ่มตัวเลข
         </button>
 
+        </>
+    )
+}
+
+// ถ้ามีใช้ useState ชื่อ default function ต้องขึ้นต้นด้วยตัวใหญ่เท่านั้น
+export default function Lottery() {
+
+    return (
+        <>
+            <LotteryRandomMachine title="สามตัวงวดนี้คือ..." size={3} />
+            <LotteryRandomMachine title="สองตัวงวดนี้คือ..." size={2} />
         </>
     )
 }
